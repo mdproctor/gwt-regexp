@@ -42,7 +42,7 @@
         </dependency>
         <dependency>
             <groupId>com.vertispan.elemental2</groupId>
-            <artifactId>elemental2-dom</artifactId>
+            <artifactId>elemental2-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
