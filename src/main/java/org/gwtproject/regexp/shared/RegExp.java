@@ -33,7 +33,7 @@ public interface RegExp {
      * @throws RuntimeException if the pattern is invalid
      */
     static RegExp compile(String pattern) {
-        return (vmType.isJava() ? new JavaRegExpFactory() : new NativeRegExpFactory()).compile(pattern);
+        return new NativeRegExpFactory().compile(pattern);
     }
 
     /**
@@ -47,7 +47,7 @@ public interface RegExp {
      * @throws RuntimeException if the pattern or the flags are invalid
      */
     static RegExp compile(String pattern, String flags) {
-        return (vmType.isJava() ? new JavaRegExpFactory() : new NativeRegExpFactory()).compile(pattern, flags);
+        return new NativeRegExpFactory().compile(pattern, flags);
     }
 
     /**
@@ -64,7 +64,7 @@ public interface RegExp {
      * @return A literal string replacement
      */
     static String quote(String input) {
-        return (vmType.isJava() ? new JavaRegExpFactory() : new NativeRegExpFactory()).quote(input);
+        return  new NativeRegExpFactory().quote(input);
     }
 
     /**
