@@ -5,23 +5,23 @@ import com.google.gwt.core.shared.GwtIncompatible;
 public interface RegExp {
 
 
-    public static IsJava vmType = new IsJava();
+    public static RegExpFactory regexpFactory = new GetRegExpFactory().get();
 
 
-    public static class IsJavaScript
+    public static class GetClientRegExpFactory
     {
-        public boolean isJava()
+        public RegExpFactory get()
         {
-            return false;
+            return new NativeRegExpFactory();
         }
     }
 
-    public static class IsJava extends IsJavaScript
+    public static class GetRegExpFactory extends GetClientRegExpFactory
     {
         @GwtIncompatible
-        public boolean isJava()
+        public RegExpFactory get()
         {
-            return true;
+            return new JavaRegExpFactory();
         }
     }
 
@@ -33,7 +33,7 @@ public interface RegExp {
      * @throws RuntimeException if the pattern is invalid
      */
     static RegExp compile(String pattern) {
-        return (vmType.isJava() ? new JavaRegExpFactory() : new NativeRegExpFactory()).compile(pattern);
+        return regexpFactory.compile(pattern);
     }
 
     /**
@@ -47,7 +47,7 @@ public interface RegExp {
      * @throws RuntimeException if the pattern or the flags are invalid
      */
     static RegExp compile(String pattern, String flags) {
-        return (vmType.isJava() ? new JavaRegExpFactory() : new NativeRegExpFactory()).compile(pattern, flags);
+        return regexpFactory.compile(pattern, flags);
     }
 
     /**
@@ -64,7 +64,7 @@ public interface RegExp {
      * @return A literal string replacement
      */
     static String quote(String input) {
-        return (vmType.isJava() ? new JavaRegExpFactory() : new NativeRegExpFactory()).quote(input);
+        return regexpFactory.quote(input);
     }
 
     /**
