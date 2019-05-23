@@ -1,6 +1,7 @@
 package org.gwtproject.regexp.shared;
 
 public interface RegExp {
+    JavaRegExpFactory regExpFactory = new JavaRegExpFactory();
 
     /**
      * Creates a regular expression object from a pattern with no flags.
@@ -10,7 +11,7 @@ public interface RegExp {
      * @throws RuntimeException if the pattern is invalid
      */
     static RegExp compile(String pattern) {
-        return new JavaRegExpFactory().compile(pattern);
+        return regExpFactory.compile(pattern);
     }
 
     /**
@@ -24,7 +25,7 @@ public interface RegExp {
      * @throws RuntimeException if the pattern or the flags are invalid
      */
     static RegExp compile(String pattern, String flags) {
-        return new JavaRegExpFactory().compile(pattern, flags);
+        return regExpFactory.compile(pattern, flags);
     }
 
     /**
@@ -41,7 +42,7 @@ public interface RegExp {
      * @return A literal string replacement
      */
     static String quote(String input) {
-        return new JavaRegExpFactory().quote(input);
+        return regExpFactory.quote(input);
     }
 
     /**

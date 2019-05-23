@@ -17,6 +17,7 @@ package org.gwtproject.regexp.client;
 
 import elemental2.core.JsRegExp;
 import elemental2.core.JsString;
+import elemental2.core.RegExpResult;
 import jsinterop.base.Js;
 import org.gwtproject.regexp.shared.MatchResult;
 import org.gwtproject.regexp.shared.RegExp;
@@ -100,8 +101,9 @@ public class NativeRegExp implements RegExp {
 
     @Override
     public MatchResult exec(String input) {
-        String[] result = jsRegExp.exec(input);
-        return isNull(result) ? null : new NativeMatchResult(Js.cast(result));
+        RegExpResult result = jsRegExp.exec(input);
+
+        return isNull(result) ? null : new NativeMatchResult(result);
     }
 
     @Override

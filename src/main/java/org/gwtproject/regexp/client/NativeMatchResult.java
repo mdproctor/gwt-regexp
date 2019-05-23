@@ -1,33 +1,34 @@
 package org.gwtproject.regexp.client;
 
 import elemental2.core.JsArray;
+import elemental2.core.RegExpResult;
 import org.gwtproject.regexp.shared.MatchResult;
 
 public class NativeMatchResult implements MatchResult {
 
-    private JsArray<String> array;
+    private RegExpResult result;
 
-    NativeMatchResult(JsArray<String> results) {
-        array = results;
+    NativeMatchResult(RegExpResult result) {
+        this.result = result;
     }
 
     @Override
     public String getGroup(int index) {
-        return array.getAt(index);
+        return result.getAt(index);
     }
 
     @Override
     public int getGroupCount() {
-        return array.length;
+        return (int) result.length;
     }
 
     @Override
     public int getIndex() {
-        return array.index;
+        return (int) result.index;
     }
 
     @Override
     public String getInput() {
-        return array.input;
+        return result.input;
     }
 }
